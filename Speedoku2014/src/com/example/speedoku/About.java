@@ -15,7 +15,7 @@ import android.os.Bundle;
 
 public class About extends Activity {
    @Override
-   protected void onCreate(Bundle savedInstanceState) { // Hallo Ezgi
+   protected void onCreate(Bundle savedInstanceState) { // Hallo Ezgi Hanim
       super.onCreate(savedInstanceState);
       setContentView(R.layout.about);
    }
