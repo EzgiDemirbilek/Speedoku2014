@@ -71,8 +71,8 @@ public class PuzzleView extends View {
    @Override
    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 	   //TODO 9f
-      width = w / 12f;
-      height = h / 12f;
+      width = w / 10f;
+      height = h / 16f;
       getRect(auswahlx, auswahly, selRect);
       Log.d(TAG, "onSizeChanged: width " + width + ", height "
             + height);
