@@ -27,11 +27,6 @@
          android:layout_marginBottom="25dip"
          android:textSize="24.5sp" />
       <Button
-         android:id="@+id/continue_button"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:text="@string/continue_label" />
-      <Button
          android:id="@+id/new_button"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
@@ -41,10 +36,12 @@
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:text="@string/about_label" />
+
       <Button
-         android:id="@+id/exit_button"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:text="@string/exit_label" />
+          android:id="@+id/statistik_button"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/statistik_label" />
+
    </LinearLayout>
 </LinearLayout>

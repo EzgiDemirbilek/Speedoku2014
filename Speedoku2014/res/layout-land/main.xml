@@ -35,9 +35,6 @@
          android:stretchColumns="*">
          <TableRow>
             <Button
-               android:id="@+id/continue_button"
-               android:text="@string/continue_label" />
-            <Button
                android:id="@+id/new_button"
                android:text="@string/new_game_label" />
          </TableRow>
@@ -45,9 +42,11 @@
             <Button
                android:id="@+id/about_button"
                android:text="@string/about_label" />
+
             <Button
-               android:id="@+id/exit_button"
-               android:text="@string/exit_label" />
+                android:id="@+id/statistik_button"
+                android:text="@string/statistik_label" />
+
          </TableRow>
       </TableLayout>
    </LinearLayout>

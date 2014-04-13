@@ -22,22 +22,16 @@ public class Sudoku extends Activity implements OnClickListener {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.main);
       // Alle Buttons werden hinzugefügt
-      View weiterButton = findViewById(R.id.continue_button);
-      weiterButton.setOnClickListener(this);
       View neuButton = findViewById(R.id.new_button);
       neuButton.setOnClickListener(this);
       View ueberUnsButton = findViewById(R.id.about_button);
       ueberUnsButton.setOnClickListener(this);
-      View exitButton = findViewById(R.id.exit_button);
+      View exitButton = findViewById(R.id.statistik_button);
       exitButton.setOnClickListener(this);
    }
    
    public void onClick(View v) {
       switch (v.getId()) {
-      case R.id.continue_button:
-         startSpiel(Game.DIFFICULTY_CONTINUE);
-         break;
-         
          
       case R.id.about_button:
          Intent i = new Intent(this, About.class);
@@ -47,7 +41,7 @@ public class Sudoku extends Activity implements OnClickListener {
       case R.id.new_button:
          neuesSpielDialog();
          break;
-      case R.id.exit_button:
+      case R.id.statistik_button:
          finish();
          break;
          

@@ -1,13 +1,16 @@
 package com.example.speedoku;
 
+import java.util.Random;
+
 import android.app.Activity;
 
 import com.example.speedoku.R;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.widget.Toast;
+import android.widget.Toast; 
 
 public class Game extends Activity {
    private static final String TAG = "Speedoku";
@@ -23,6 +26,8 @@ public class Game extends Activity {
    
    protected static final int DIFFICULTY_CONTINUE = -1;
    
+   Random r = new Random();
+   int zufall = r.nextInt()+1;
 
    private int puzzle[] = new int[9 * 9];
 
