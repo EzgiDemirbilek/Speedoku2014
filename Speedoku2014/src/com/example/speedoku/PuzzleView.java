@@ -20,7 +20,7 @@ import android.view.animation.AnimationUtils;
 
 public class PuzzleView extends View {
    
-   private static final String TAG = "Sudoku";
+   private static final String TAG = "Speedoku";
 
    
    private static final String SELX = "selX"; 
@@ -29,10 +29,10 @@ public class PuzzleView extends View {
    private static final int ID = 42; 
 
    
-   private float width;    // width of one tile
-   private float height;   // height of one tile
-   private int selX;       // X index of selection
-   private int selY;       // Y index of selection
+   private float width;    // Breite eines Kachels
+   private float height;   // Höhe eines Kachels
+   private int selX;       // X index einer selection
+   private int selY;       // Y index einer selection
    private final Rect selRect = new Rect();
 
    private final Game game;
@@ -70,9 +70,9 @@ public class PuzzleView extends View {
 
    @Override
    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-	   //TODO 9f
-      width = w / 12f;
-      height = h / 12f;
+	   //TODO Quadratische Felder 9f
+      width = w / 10f;
+      height = h / 16f;
       getRect(selX, selY, selRect);
       Log.d(TAG, "onSizeChanged: width " + width + ", height "
             + height);
@@ -90,7 +90,7 @@ public class PuzzleView extends View {
       
       // Draw the board...
       
-      // Define colors for the grid lines
+      // Farben definieren einer Linie
       Paint dark = new Paint();
       dark.setColor(getResources().getColor(R.color.puzzle_dark));
 
