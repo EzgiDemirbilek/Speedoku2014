@@ -23,16 +23,16 @@ public class PuzzleView extends View {
    private static final String TAG = "Speedoku";
 
    
-   private static final String SELX = "selX"; 
-   private static final String SELY = "selY";
+   private static final String AUSWAHLX = "auswahlx"; 
+   private static final String AUSWAHLY = "auswahly";
    private static final String VIEW_STATE = "viewState";
    private static final int ID = 42; 
 
    
-   private float width;    // Breite eines Kachels
-   private float height;   // Höhe eines Kachels
-   private int selX;       // X index einer selection
-   private int selY;       // Y index einer selection
+   private float width;    //Titelbreite 
+   private float height;   // Titelhöhe
+   private int auswahlx;       // X Index
+   private int auswahly;       // Y Index
    private final Rect selRect = new Rect();
 
    private final Game game;
@@ -53,8 +53,8 @@ public class PuzzleView extends View {
       Parcelable p = super.onSaveInstanceState();
       Log.d(TAG, "onSaveInstanceState");
       Bundle bundle = new Bundle();
-      bundle.putInt(SELX, selX);
-      bundle.putInt(SELY, selY);
+      bundle.putInt(AUSWAHLX, auswahlx);
+      bundle.putInt(AUSWAHLY, auswahly);
       bundle.putParcelable(VIEW_STATE, p);
       return bundle;
    }
@@ -62,7 +62,7 @@ public class PuzzleView extends View {
    protected void onRestoreInstanceState(Parcelable state) { 
       Log.d(TAG, "onRestoreInstanceState");
       Bundle bundle = (Bundle) state;
-      select(bundle.getInt(SELX), bundle.getInt(SELY));
+      select(bundle.getInt(AUSWAHLX), bundle.getInt(AUSWAHLY));
       super.onRestoreInstanceState(bundle.getParcelable(VIEW_STATE));
       return;
    }
@@ -70,10 +70,10 @@ public class PuzzleView extends View {
 
    @Override
    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-	   //TODO Quadratische Felder 9f
-      width = w / 10f;
-      height = h / 16f;
-      getRect(selX, selY, selRect);
+	   //TODO 9f
+      width = w / 12f;
+      height = h / 12f;
+      getRect(auswahlx, auswahly, selRect);
       Log.d(TAG, "onSizeChanged: width " + width + ", height "
             + height);
       super.onSizeChanged(w, h, oldw, oldh);
@@ -90,7 +90,7 @@ public class PuzzleView extends View {
       
       // Draw the board...
       
-      // Farben definieren einer Linie
+      // Gitter Farben festlegen
       Paint dark = new Paint();
       dark.setColor(getResources().getColor(R.color.puzzle_dark));
 
@@ -100,7 +100,7 @@ public class PuzzleView extends View {
       Paint light = new Paint();
       light.setColor(getResources().getColor(R.color.puzzle_light));
 
-      //TODO Draw the minor grid lines 9
+      //TODO Gitter zeichnen
       for (int i = 0; i < 12; i++) {
          canvas.drawLine(0, i * height, getWidth(), i * height,
                light);
@@ -112,7 +112,7 @@ public class PuzzleView extends View {
                getHeight(), hilite);
       }
 
-      // Draw the major grid lines
+      // Hauptgitterachsen zeichnen
       for (int i = 0; i < 12; i++) {
          if (i % 3 != 0)
             continue;
@@ -126,7 +126,8 @@ public class PuzzleView extends View {
       }
 
       // Draw the numbers...
-      // Define color and style for numbers
+      
+      // Zahlendesign festlegen
       Paint foreground = new Paint(Paint.ANTI_ALIAS_FLAG);
       foreground.setColor(getResources().getColor(
             R.color.puzzle_foreground));
@@ -136,11 +137,11 @@ public class PuzzleView extends View {
       foreground.setTextScaleX(width / height);
       foreground.setTextAlign(Paint.Align.CENTER);
 
-      // Draw the number in the center of the tile
+      // Zahl in die Mitte der Kachel einfügen
       FontMetrics fm = foreground.getFontMetrics();
-      // Centering in X: use alignment (and X at midpoint)
+      // X zentrieren
       float x = width / 2;
-      // Centering in Y: measure ascent/descent first
+      // Y zentrieren: measure ascent/descent first TODO nocheinmal anschauen
       float y = height / 2 - (fm.ascent + fm.descent) / 2;
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 9; j++) {
@@ -153,7 +154,7 @@ public class PuzzleView extends View {
       if (Prefs.getHints(getContext())) {
          // Draw the hints...
          
-         // Pick a hint color based on #moves left
+         // Pick a hint color based on #moves left TODO kommt vielleicht raus
          Paint hint = new Paint();
          int c[] = { getResources().getColor(R.color.puzzle_hint_0),
                getResources().getColor(R.color.puzzle_hint_1),
@@ -173,7 +174,7 @@ public class PuzzleView extends View {
       }
       
 
-      // Draw the selection...
+      // Auswahl zeichnen
       Log.d(TAG, "selRect=" + selRect);
       Paint selected = new Paint();
       selected.setColor(getResources().getColor(
@@ -188,8 +189,8 @@ public class PuzzleView extends View {
 
       select((int) (event.getX() / width),
             (int) (event.getY() / height));
-      game.showKeypadOrError(selX, selY);
-      Log.d(TAG, "onTouchEvent: x " + selX + ", y " + selY);
+      game.showKeypadOrError(auswahlx, auswahly);
+      Log.d(TAG, "onTouchEvent: x " + auswahlx + ", y " + auswahly);
       return true;
    }
 
@@ -199,16 +200,16 @@ public class PuzzleView extends View {
             + event);
       switch (keyCode) {
       case KeyEvent.KEYCODE_DPAD_UP:
-         select(selX, selY - 1);
+         select(auswahlx, auswahly - 1);
          break;
       case KeyEvent.KEYCODE_DPAD_DOWN:
-         select(selX, selY + 1);
+         select(auswahlx, auswahly + 1);
          break;
       case KeyEvent.KEYCODE_DPAD_LEFT:
-         select(selX - 1, selY);
+         select(auswahlx - 1, auswahly);
          break;
       case KeyEvent.KEYCODE_DPAD_RIGHT:
-         select(selX + 1, selY);
+         select(auswahlx + 1, auswahly);
          break;
       case KeyEvent.KEYCODE_0:
       case KeyEvent.KEYCODE_SPACE: setSelectedTile(0); break;
@@ -223,7 +224,7 @@ public class PuzzleView extends View {
       case KeyEvent.KEYCODE_9:     setSelectedTile(9); break;
       case KeyEvent.KEYCODE_ENTER:
       case KeyEvent.KEYCODE_DPAD_CENTER:
-         game.showKeypadOrError(selX, selY);
+         game.showKeypadOrError(auswahlx, auswahly);
          break;
       default:
          return super.onKeyDown(keyCode, event);
@@ -232,10 +233,10 @@ public class PuzzleView extends View {
    }
 
    public void setSelectedTile(int tile) {
-      if (game.setTileIfValid(selX, selY, tile)) {
-         invalidate();// may change hints
+      if (game.setTileIfValid(auswahlx, auswahly, tile)) {
+         invalidate();// Spur abändern...
       } else {
-         // Number is not valid for this tile
+         // Zahl ist für die Kachel ungültig
          Log.d(TAG, "setSelectedTile: invalid: " + tile);
          startAnimation(AnimationUtils.loadAnimation(game,
                R.anim.shake));
@@ -244,9 +245,9 @@ public class PuzzleView extends View {
 
    private void select(int x, int y) {
       invalidate(selRect);
-      selX = Math.min(Math.max(x, 0), 8);
-      selY = Math.min(Math.max(y, 0), 8);
-      getRect(selX, selY, selRect);
+      auswahlx = Math.min(Math.max(x, 0), 8);
+      auswahly = Math.min(Math.max(y, 0), 8);
+      getRect(auswahlx, auswahly, selRect);
       invalidate(selRect);
    }
 
@@ -255,6 +256,6 @@ public class PuzzleView extends View {
             * width + width), (int) (y * height + height));
    }
    
-   // ...
+   
 }
 
