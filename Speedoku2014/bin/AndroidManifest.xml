@@ -31,6 +31,10 @@
               android:label="@string/settings_title">
         </activity>
         
+        <activity android:name=".Spielplan"
+              android:label="@string/settings_title">
+        </activity>
+        
         
         <activity android:name=".Game"
               android:label="@string/game_title"/>

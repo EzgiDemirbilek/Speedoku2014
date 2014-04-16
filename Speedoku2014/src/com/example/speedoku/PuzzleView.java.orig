@@ -28,7 +28,7 @@ public class PuzzleView extends View {
    private static final String VIEW_STATE = "viewState";
    private static final int ID = 42; 
 
-   
+
    private float width;    //Titelbreite 
    private float height;   // Titelhöhe
    private int auswahlx;       // X Index
@@ -70,10 +70,12 @@ public class PuzzleView extends View {
 
    @Override
    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-	   //TODO 9f
-      width = (w / 10f)+8;
-      height = (h / 16f)+8;
+
+	   //TODO Quadratische Felder 9f
+      width = w / 10f;
+      height = h / 16f;
       getRect(auswahlx, auswahly, selRect);
+
       Log.d(TAG, "onSizeChanged: width " + width + ", height "
             + height);
       super.onSizeChanged(w, h, oldw, oldh);
@@ -89,8 +91,9 @@ public class PuzzleView extends View {
 
       
       // Draw the board...
-      
-      // Gitter Farben festlegen
+
+      // Farben definieren einer Linie
+
       Paint dark = new Paint();
       dark.setColor(getResources().getColor(R.color.puzzle_dark));
 
@@ -180,7 +183,6 @@ public class PuzzleView extends View {
       selected.setColor(getResources().getColor(
             R.color.puzzle_selected));
       canvas.drawRect(selRect, selected);
-      
    }
 
    @Override

@@ -39,7 +39,9 @@ public class Sudoku extends Activity implements OnClickListener {
          break;
      
       case R.id.new_button:
-         neuesSpielDialog();
+    	 Intent spielI = new Intent(this, Spielplan.class);
+         startActivity(spielI); 
+    	 //neuesSpielDialog();
          break;
       case R.id.statistik_button:
          finish();
