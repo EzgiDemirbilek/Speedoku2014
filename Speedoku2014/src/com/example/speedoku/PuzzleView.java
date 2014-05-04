@@ -1,24 +1,26 @@
 package com.example.speedoku;
 
 import com.example.speedoku.R;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.Paint.Style;
-
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
-
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 
-public class PuzzleView extends View {
+public class PuzzleView extends View{
    
    private static final String TAG = "Speedoku";
 
@@ -28,6 +30,7 @@ public class PuzzleView extends View {
    private static final String VIEW_STATE = "viewState";
    private static final int ID = 42; 
 
+   public Canvas c;
    
    private float width;    //Titelbreite 
    private float height;   // Titelhöhe
@@ -35,18 +38,31 @@ public class PuzzleView extends View {
    private int auswahly;       // Y Index
    private final Rect selRect = new Rect();
 
-   private final Game game;
+   private Game game = new Game();
    
-   public PuzzleView(Context context) {
+   public PuzzleView(Context context, AttributeSet attr) {
       
-      super(context);
-      this.game = (Game) context;
+      super(context,attr);
+      
+//      if(!isInEditMode()){
+//      this.game = (Game) context;     
+//      }
+      
+      init(game);
       setFocusable(true);
       setFocusableInTouchMode(true);
       
       // ...
       setId(ID); 
    }
+   
+   private void init(Context context) {
+	    //do stuff that was in your original constructor...
+	      if(!isInEditMode()){
+	        
+	        this.game = (Game) context;
+	      }
+	}
 
    @Override
    protected Parcelable onSaveInstanceState() { 
@@ -71,12 +87,17 @@ public class PuzzleView extends View {
    @Override
    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 	   //TODO 9f
-      width = (w / 10f)+8;
-      height = (h / 16f)+8;
+      width = (w / 10f)+4;
+      height = (h / 10f)+4;
       getRect(auswahlx, auswahly, selRect);
       Log.d(TAG, "onSizeChanged: width " + width + ", height "
             + height);
+      Log.d(TAG, "w: "+w+" h: "+h+" oldw: "+oldw+" oldh: "+oldh);
       super.onSizeChanged(w, h, oldw, oldh);
+   }
+   
+   public Canvas getOnDraw(){
+	   return c;
    }
 
    @Override
@@ -101,7 +122,7 @@ public class PuzzleView extends View {
       light.setColor(getResources().getColor(R.color.puzzle_light));
 
       //TODO Gitter zeichnen
-      for (int i = 0; i < 12; i++) {
+      for (int i = 0; i < 9; i++) {
          canvas.drawLine(0, i * height, getWidth(), i * height,
                light);
          canvas.drawLine(0, i * height + 1, getWidth(), i * height
@@ -113,7 +134,7 @@ public class PuzzleView extends View {
       }
 
       // Hauptgitterachsen zeichnen
-      for (int i = 0; i < 12; i++) {
+      for (int i = 0; i < 9; i++) {
          if (i % 3 != 0)
             continue;
          canvas.drawLine(0, i * height, getWidth(), i * height,
@@ -145,42 +166,44 @@ public class PuzzleView extends View {
       float y = height / 2 - (fm.ascent + fm.descent) / 2;
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 9; j++) {
-            canvas.drawText(this.game.getTileString(i, j), i
+            canvas.drawText("1", i
                   * width + x, j * height + y, foreground);
          }
       }
 
       
-      if (Prefs.getHints(getContext())) {
-         // Draw the hints...
-         
-         // Pick a hint color based on #moves left TODO kommt vielleicht raus
-         Paint hint = new Paint();
-         int c[] = { getResources().getColor(R.color.puzzle_hint_0),
-               getResources().getColor(R.color.puzzle_hint_1),
-               getResources().getColor(R.color.puzzle_hint_2), };
-         Rect r = new Rect();
-         for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-               int movesleft = 9 - game.getUsedTiles(i, j).length;
-               if (movesleft < c.length) {
-                  getRect(i, j, r);
-                  hint.setColor(c[movesleft]);
-                  canvas.drawRect(r, hint);
-               }
-            }
-         }
-         
-      }
+//      if (Prefs.getHints(getContext())) {
+//         // Draw the hints...
+//         
+//         // Pick a hint color based on #moves left TODO kommt vielleicht raus
+//         Paint hint = new Paint();
+//         int c[] = { getResources().getColor(R.color.puzzle_hint_0),
+//               getResources().getColor(R.color.puzzle_hint_1),
+//               getResources().getColor(R.color.puzzle_hint_2), };
+//         Rect r = new Rect();
+//         for (int i = 0; i < 9; i++) {
+//            for (int j = 0; j < 9; j++) {
+//               int movesleft = 9 - game.getUsedTiles(i, j).length;
+//               if (movesleft < c.length) {
+//                  getRect(i, j, r);
+//                  hint.setColor(c[movesleft]);
+//                  canvas.drawRect(r, hint);
+//               }
+//            }
+//         }
+//         
+//      }
       
+      Log.d(TAG, "Canvwas Breite: "+canvas.getWidth()+" Canvas höhe: "+canvas.getHeight());
 
       // Auswahl zeichnen
-      Log.d(TAG, "selRect=" + selRect);
-      Paint selected = new Paint();
-      selected.setColor(getResources().getColor(
-            R.color.puzzle_selected));
-      canvas.drawRect(selRect, selected);
+//      Log.d(TAG, "selRect=" + selRect);
+//      Paint selected = new Paint();
+//      selected.setColor(getResources().getColor(
+//            R.color.puzzle_selected));
+//      canvas.drawRect(selRect, selected);
       
+      c = canvas;
    }
 
    @Override
@@ -190,7 +213,8 @@ public class PuzzleView extends View {
 
       select((int) (event.getX() / width),
             (int) (event.getY() / height));
-      game.showKeypadOrError(auswahlx, auswahly);
+      //TODO kommt vielleicht raus
+//      game.showKeypadOrError(auswahlx, auswahly);
       Log.d(TAG, "onTouchEvent: x " + auswahlx + ", y " + auswahly);
       return true;
    }
@@ -225,6 +249,7 @@ public class PuzzleView extends View {
       case KeyEvent.KEYCODE_9:     setSelectedTile(9); break;
       case KeyEvent.KEYCODE_ENTER:
       case KeyEvent.KEYCODE_DPAD_CENTER:
+//    	 TODO kommt vielleich raus
          game.showKeypadOrError(auswahlx, auswahly);
          break;
       default:

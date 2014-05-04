@@ -10,9 +10,13 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast; 
 
-public class Game extends Activity {
+public class Game extends Activity{
    private static final String TAG = "Speedoku";
 
    public static final String KEY_DIFFICULTY =
@@ -46,6 +50,10 @@ public class Game extends Activity {
 
    private PuzzleView puzzleView;
 
+//   ImageView spielview = (ImageView) findViewById(R.id.sudokuview);
+//   LinearLayout ll = (LinearLayout) findViewById(R.id.ll_spiel);
+//	mBoard = (SudokuBoardView) findViewById(R.id.sudoku_board);
+
    
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +66,11 @@ public class Game extends Activity {
       puzzle = getPuzzle(diff);
       calculateUsedTiles();
 
-      puzzleView = new PuzzleView(this);
+      puzzleView = new PuzzleView(this, null); 
+//      spielview.draw(puzzleView.getOnDraw());
+//      ll.addView(puzzleView, 0);
       setContentView(puzzleView);
-      puzzleView.requestFocus();
+//      puzzleView.requestFocus();
 
       
       // ...
@@ -163,12 +173,14 @@ public class Game extends Activity {
       if (tiles.length == 9) {
          Toast toast = Toast.makeText(this,
                R.string.no_moves_label, Toast.LENGTH_SHORT);
-         toast.setGravity(Gravity.CENTER, 0, 0);
-         toast.show();
+         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+//         toast.show();
       } else {
          Log.d(TAG, "showKeypad: used=" + toPuzzleString(tiles));
          Dialog v = new Keypad(this, tiles, puzzleView);
-         v.show();
+         v.getWindow().setGravity(Gravity.BOTTOM);
+         v.getWindow().setLayout(300, 100);
+//         v.show();
       }
    }
 

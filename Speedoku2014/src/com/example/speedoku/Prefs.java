@@ -13,7 +13,7 @@ public class Prefs extends PreferenceActivity {
    private static final String OPT_HINTS = "hints";
    private static final boolean OPT_HINTS_DEF = true;
 
-   @Override
+   @Deprecated
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       addPreferencesFromResource(R.xml.settings);

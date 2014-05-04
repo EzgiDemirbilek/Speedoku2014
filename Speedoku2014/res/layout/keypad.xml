@@ -24,27 +24,37 @@
       <Button android:id="@+id/keypad_3"
          android:text="3">
       </Button>
+
+      <Button
+          android:id="@+id/keypad_4"
+          android:text="4" />
+
+      <Button
+          android:id="@+id/keypad_5"
+          android:text="5" />
+
    </TableRow>
    <TableRow>
-      <Button android:id="@+id/keypad_4"
-         android:text="4">
-      </Button>
-      <Button android:id="@+id/keypad_5"
-         android:text="5">
-      </Button>
       <Button android:id="@+id/keypad_6"
          android:text="6">
       </Button>
-   </TableRow>
-   <TableRow>
-      <Button android:id="@+id/keypad_7"
-         android:text="7">
-      </Button>
-      <Button android:id="@+id/keypad_8"
-         android:text="8">
-      </Button>
-      <Button android:id="@+id/keypad_9"
-         android:text="9">
-      </Button>
+
+      <Button
+          android:id="@+id/keypad_7"
+          android:text="7" />
+
+      <Button
+          android:id="@+id/keypad_8"
+          android:text="8" />
+
+      <Button
+          android:id="@+id/keypad_9"
+          android:text="9" />
+
+      <TextView
+          android:id="@+id/timer"
+          android:layout_width="wrap_content"
+          android:layout_height="50dp" />
+
    </TableRow>
 </TableLayout>

@@ -30,6 +30,8 @@ public class Keypad extends Dialog {
       setTitle(R.string.keypad_title);
       setContentView(R.layout.keypad);
       findViews();
+      
+      //TODO Zeigt nicht alle Zahlen an.
       for (int element : useds) {
          if (element != 0)
             keys[element - 1].setVisibility(View.INVISIBLE);
