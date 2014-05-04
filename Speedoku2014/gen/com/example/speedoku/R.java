@@ -47,8 +47,9 @@ public final class R {
         public static final int keypad_9=0x7f0a000a;
         public static final int linear_layout=0x7f0a000f;
         public static final int new_button=0x7f0a000c;
-        public static final int settings=0x7f0a0011;
+        public static final int settings=0x7f0a0012;
         public static final int statistik_button=0x7f0a000e;
+        public static final int statistik_content=0x7f0a0011;
         public static final int sudokuview=0x7f0a0010;
         public static final int timer=0x7f0a000b;
     }
@@ -57,34 +58,37 @@ public final class R {
         public static final int keypad=0x7f030001;
         public static final int main=0x7f030002;
         public static final int spiel=0x7f030003;
+        public static final int statistiken=0x7f030004;
     }
     public static final class menu {
         public static final int menu=0x7f090000;
     }
     public static final class string {
         public static final int about_label=0x7f080004;
-        public static final int about_text=0x7f080015;
-        public static final int about_title=0x7f080014;
+        public static final int about_text=0x7f080016;
+        public static final int about_title=0x7f080015;
         public static final int app_name=0x7f080000;
         public static final int continue_label=0x7f080002;
-        public static final int easy_label=0x7f08000e;
-        public static final int exit_label=0x7f080005;
-        public static final int game_title=0x7f080011;
-        public static final int hard_label=0x7f080010;
-        public static final int hints_summary=0x7f08000c;
-        public static final int hints_title=0x7f08000b;
-        public static final int keypad_title=0x7f080013;
+        public static final int easy_label=0x7f08000f;
+        public static final int exit_label=0x7f080006;
+        public static final int game_title=0x7f080012;
+        public static final int hard_label=0x7f080011;
+        public static final int hints_summary=0x7f08000d;
+        public static final int hints_title=0x7f08000c;
+        public static final int keypad_title=0x7f080014;
         public static final int main_title=0x7f080001;
-        public static final int medium_label=0x7f08000f;
-        public static final int music_summary=0x7f08000a;
-        public static final int music_title=0x7f080009;
+        public static final int medium_label=0x7f080010;
+        public static final int music_summary=0x7f08000b;
+        public static final int music_title=0x7f08000a;
         public static final int new_game_label=0x7f080003;
-        public static final int new_game_title=0x7f08000d;
-        public static final int no_moves_label=0x7f080012;
-        public static final int settings_label=0x7f080006;
-        public static final int settings_shortcut=0x7f080008;
-        public static final int settings_title=0x7f080007;
-        public static final int statistik_label=0x7f080016;
+        public static final int new_game_title=0x7f08000e;
+        public static final int no_moves_label=0x7f080013;
+        public static final int settings_label=0x7f080007;
+        public static final int settings_shortcut=0x7f080009;
+        public static final int settings_title=0x7f080008;
+        public static final int statistik_label=0x7f080005;
+        public static final int statistiken_text=0x7f080018;
+        public static final int statistiken_title=0x7f080017;
     }
     public static final class xml {
         public static final int settings=0x7f050000;
