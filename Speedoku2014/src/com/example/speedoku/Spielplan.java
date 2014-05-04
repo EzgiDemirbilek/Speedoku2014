@@ -14,7 +14,7 @@ public class Spielplan extends Activity implements OnClickListener {
 	
 
 //  Timer
-  private int nr = 20;
+  private int nr = 80;
   private TextView textfield;
   private Handler handler;
   private boolean runbl = true;

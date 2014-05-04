@@ -166,8 +166,9 @@ public class PuzzleView extends View{
       float y = height / 2 - (fm.ascent + fm.descent) / 2;
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 9; j++) {
-            canvas.drawText("1", i
-                  * width + x, j * height + y, foreground);
+            canvas.drawText(this.game.getTileString(i, j), i * width + x, j * height + y, foreground);
+//           Log.d(TAG, "i*width  "+i*width+" j*height "+j*height);
+//            Log.d(TAG, "Werte Sudoku: "+game.getTileString(i, j));
          }
       }
 

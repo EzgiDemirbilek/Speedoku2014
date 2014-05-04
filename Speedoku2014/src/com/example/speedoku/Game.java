@@ -39,14 +39,14 @@ public class Game extends Activity{
       "360000000004230800000004200" +
       "070460003820000014500013020" +
       "001900000007048300000000045";
-   private final String mediumPuzzle =
-      "650000070000506000014000005" +
-      "007009000002314700000700800" +
-      "500000630000201000030000097";
-   private final String hardPuzzle =
-      "009000000080605020501078000" +
-      "000000700706040102004000000" +
-      "000720903090301080000000600";
+//   private final String mediumPuzzle =
+//      "650000070000506000014000005" +
+//      "007009000002314700000700800" +
+//      "500000630000201000030000097";
+//   private final String hardPuzzle =
+//      "009000000080605020501078000" +
+//      "000000700706040102004000000" +
+//      "000720903090301080000000600";
 
    private PuzzleView puzzleView;
 
@@ -61,9 +61,9 @@ public class Game extends Activity{
       super.onCreate(savedInstanceState);
       Log.d(TAG, "onCreate");
 
-      int diff = getIntent().getIntExtra(KEY_DIFFICULTY,
-            DIFFICULTY_EASY);
-      puzzle = getPuzzle(diff);
+//      int diff = getIntent().getIntExtra(KEY_DIFFICULTY,
+//            DIFFICULTY_EASY);
+      puzzle = getPuzzle();
       calculateUsedTiles();
 
       puzzleView = new PuzzleView(this, null); 
@@ -91,27 +91,10 @@ public class Game extends Activity{
    
    
    /** Schwierigkeit bestimmen */
-   private int[] getPuzzle(int diff) {
-      String puz;
-      switch (diff) {
-      case DIFFICULTY_CONTINUE:
-         puz = getPreferences(MODE_PRIVATE).getString(PUZZLE,
-               easyPuzzle);
-         break;
-         // ...
-         
-      case DIFFICULTY_HARD:
-         puz = hardPuzzle;
-         break;
-      case DIFFICULTY_MEDIUM:
-         puz = mediumPuzzle;
-         break;
-      case DIFFICULTY_EASY:
-      default:
+   private int[] getPuzzle() {
+	   	String puz;
          puz = easyPuzzle;
-         break;
-         
-      }
+//         Log.d(TAG, puz);
       return fromPuzzleString(puz);
    }
    
@@ -130,12 +113,15 @@ public class Game extends Activity{
       int[] puz = new int[string.length()];
       for (int i = 0; i < puz.length; i++) {
          puz[i] = string.charAt(i) - '0';
+//         Log.d(TAG, "String von dem Puzzle von fromPuzzleString: "+String.valueOf(puz[i]));
       }
       return puz;
    }
 
    /** Kacheln zurückgeben*/
    private int getTile(int x, int y) {
+	   puzzle=getPuzzle();
+//	   Log.d(TAG,String.valueOf(puzzle[y * 9 + x]));
       return puzzle[y * 9 + x];
    }
 
@@ -174,7 +160,7 @@ public class Game extends Activity{
          Toast toast = Toast.makeText(this,
                R.string.no_moves_label, Toast.LENGTH_SHORT);
          toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-//         toast.show();
+         toast.show();
       } else {
          Log.d(TAG, "showKeypad: used=" + toPuzzleString(tiles));
          Dialog v = new Keypad(this, tiles, puzzleView);
