@@ -1,6 +1,9 @@
 package com.example.speedoku;
 
+import java.util.Random;
+
 import com.example.speedoku.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +18,8 @@ import android.view.View.OnClickListener;
 
 public class Sudoku extends Activity implements OnClickListener {
    private static final String TAG = "Speedoku";
+
+   int next = 1;
    
    // Main Methode von Android
    @Override
@@ -30,6 +35,14 @@ public class Sudoku extends Activity implements OnClickListener {
       exitButton.setOnClickListener(this);
    }
    
+//   public void setNext(int i){
+//	   next = i;
+//   }
+//   
+//   public int getNext(){
+//	   return next;
+//   }
+   
    public void onClick(View v) {
       switch (v.getId()) {
          
@@ -40,8 +53,10 @@ public class Sudoku extends Activity implements OnClickListener {
      
       case R.id.new_button:
     	 Intent spielI = new Intent(this, Spielplan.class);
-         startActivity(spielI); 
-    	 //neuesSpielDialog();
+    	  Random zufall = new Random();
+     	   next = zufall.nextInt(2)+1;
+       startActivity(spielI); 
+
          break;
       case R.id.statistik_button:
      	 Intent statistik = new Intent(this, Statistiken.class);

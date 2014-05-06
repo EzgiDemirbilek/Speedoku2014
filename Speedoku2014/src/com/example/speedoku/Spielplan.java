@@ -1,20 +1,20 @@
 package com.example.speedoku;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.graphics.Color;
+//import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Spielplan extends Activity implements OnClickListener {
 	
 
 //  Timer
-  private int nr = 80;
+  private int nr = 20;
   private TextView textfield;
   private Handler handler;
   private boolean runbl = true;
@@ -52,6 +52,12 @@ public class Spielplan extends Activity implements OnClickListener {
 						}
 						else{
 						nr --;
+						if(nr<=10){
+							textfield.setTextColor(Color.parseColor("#FF0000"));
+						}
+						else{
+							textfield.setTextColor(Color.parseColor("#000000"));
+						}
 						textfield.setText("Zeit: "+String.valueOf(nr));
 						}
 						

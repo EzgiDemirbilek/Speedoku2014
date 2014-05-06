@@ -30,8 +30,8 @@ public class Game extends Activity{
    
    protected static final int DIFFICULTY_CONTINUE = -1;
    
-   Random r = new Random();
-   int zufall = r.nextInt()+1;
+//   Random r = new Random();
+//   int zufall = r.nextInt()+1;
 
    private int puzzle[] = new int[9 * 9];
 
@@ -39,6 +39,12 @@ public class Game extends Activity{
       "360000000004230800000004200" +
       "070460003820000014500013020" +
       "001900000007048300000000045";
+   
+   private final String testPuzzle = 
+		   "400010000001875030050020"
+		   + "1070000019702057006031"
+		   + "7940000096008034003010"
+		   + "6500004900006";
 //   private final String mediumPuzzle =
 //      "650000070000506000014000005" +
 //      "007009000002314700000700800" +
@@ -47,7 +53,9 @@ public class Game extends Activity{
 //      "009000000080605020501078000" +
 //      "000000700706040102004000000" +
 //      "000720903090301080000000600";
-
+   
+   private String zufallPuzzle;
+   private int zufallsZahl;
    private PuzzleView puzzleView;
 
 //   ImageView spielview = (ImageView) findViewById(R.id.sudokuview);
@@ -67,10 +75,14 @@ public class Game extends Activity{
       calculateUsedTiles();
 
       puzzleView = new PuzzleView(this, null); 
+// 	  Random zufall = new Random();
+// 	  int next = zufall.nextInt(2)+1;
+// 	  Log.d(TAG, "Zufallsgenerierte Zahl in der Klasse Sudoku: "+next);
+//      zufallSudoku();
 //      spielview.draw(puzzleView.getOnDraw());
 //      ll.addView(puzzleView, 0);
       setContentView(puzzleView);
-//      puzzleView.requestFocus();
+      puzzleView.requestFocus();
 
       
       // ...
@@ -88,13 +100,22 @@ public class Game extends Activity{
             toPuzzleString(puzzle)).commit();
    }
    
+   public void setZufallsZahl(){
+	   Random zufall = new Random();
+	   zufallsZahl = zufall.nextInt(2)+1;
+   }
+   
+   public int getZufallsZahl(){
+	   return zufallsZahl;
+   }
    
    
    /** Schwierigkeit bestimmen */
    private int[] getPuzzle() {
 	   	String puz;
-         puz = easyPuzzle;
-//         Log.d(TAG, puz);
+	   	zufallSudoku(getZufallsZahl());
+         puz = getZufallSudoku();
+         Log.d(TAG, "Zufallspuzzel: "+puz);
       return fromPuzzleString(puz);
    }
    
@@ -116,6 +137,24 @@ public class Game extends Activity{
 //         Log.d(TAG, "String von dem Puzzle von fromPuzzleString: "+String.valueOf(puz[i]));
       }
       return puz;
+   }
+   
+   public void zufallSudoku(int next){
+	 	  
+	   switch (next) {
+	   case 1:
+		   zufallPuzzle = easyPuzzle;
+		break;
+
+	   case 2:
+		   zufallPuzzle = testPuzzle;
+		   break;
+		
+	}
+   }
+   
+   public String getZufallSudoku(){
+	   return zufallPuzzle;
    }
 
    /** Kacheln zurückgeben*/

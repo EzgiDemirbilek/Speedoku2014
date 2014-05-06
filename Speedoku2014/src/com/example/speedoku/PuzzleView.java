@@ -1,5 +1,7 @@
 package com.example.speedoku;
 
+import java.util.Random;
+
 import com.example.speedoku.R;
 
 import android.content.Context;
@@ -51,8 +53,8 @@ public class PuzzleView extends View{
       init(game);
       setFocusable(true);
       setFocusableInTouchMode(true);
-      
-      // ...
+   	 
+
       setId(ID); 
    }
    
@@ -102,7 +104,10 @@ public class PuzzleView extends View{
 
    @Override
    protected void onDraw(Canvas canvas) {
-      // Hintergrund erstellen
+      
+	  
+	  // Hintergrund erstellen
+
       Paint background = new Paint();
       background.setColor(getResources().getColor(
             R.color.puzzle_background));
@@ -145,8 +150,6 @@ public class PuzzleView extends View{
          canvas.drawLine(i * width + 1, 0, i * width + 1,
                getHeight(), hilite);
       }
-
-      // Draw the numbers...
       
       // Zahlendesign festlegen
       Paint foreground = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -164,11 +167,11 @@ public class PuzzleView extends View{
       float x = width / 2;
       // Y zentrieren: measure ascent/descent first TODO nocheinmal anschauen
       float y = height / 2 - (fm.ascent + fm.descent) / 2;
+      game.setZufallsZahl();
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 9; j++) {
             canvas.drawText(this.game.getTileString(i, j), i * width + x, j * height + y, foreground);
-//           Log.d(TAG, "i*width  "+i*width+" j*height "+j*height);
-//            Log.d(TAG, "Werte Sudoku: "+game.getTileString(i, j));
+
          }
       }
 
@@ -199,10 +202,10 @@ public class PuzzleView extends View{
 
       // Auswahl zeichnen
 //      Log.d(TAG, "selRect=" + selRect);
-//      Paint selected = new Paint();
-//      selected.setColor(getResources().getColor(
-//            R.color.puzzle_selected));
-//      canvas.drawRect(selRect, selected);
+      Paint selected = new Paint();
+      selected.setColor(getResources().getColor(
+            R.color.puzzle_selected));
+      canvas.drawRect(selRect, selected);
       
       c = canvas;
    }
@@ -216,6 +219,7 @@ public class PuzzleView extends View{
             (int) (event.getY() / height));
       //TODO kommt vielleicht raus
 //      game.showKeypadOrError(auswahlx, auswahly);
+
       Log.d(TAG, "onTouchEvent: x " + auswahlx + ", y " + auswahly);
       return true;
    }
