@@ -11,18 +11,16 @@
         android:layout_height="360dp"
         android:background="@color/background" />
     
-    <include
+    <!--<include
         android:layout_height="132dp"
-        layout="@layout/keypad" />
+        layout="@layout/keypad" />-->
     
-   <!-- <LinearLayout
+     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.00"
         android:orientation="vertical" >
 
-       
-       
         <LinearLayout
             android:layout_width="318dp"
             android:layout_height="wrap_content" >
@@ -80,17 +78,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9" />
-
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="X" />
-
+            
+            <TextView
+          android:id="@+id/timer"
+          android:layout_width="wrap_content"
+          android:layout_height="50dp" />
         </LinearLayout>
-      
        
-       
-    </LinearLayout> -->
+    </LinearLayout> <!--  -->
 
 </LinearLayout>

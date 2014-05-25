@@ -10,10 +10,10 @@
 
 <resources>
    <string name="app_name">Speedoku</string>
-   <string name="main_title">Speedoku by Selim &amp; Ezgi ;)</string>
+   <string name="main_title">Speedoku</string>
    <string name="continue_label">Continue</string>
    <string name="new_game_label">Neues Spiel</string>
-   <string name="about_label">Über uns</string>
+   <string name="about_label">Über Speedoku</string>
    <string name="statistik_label">Statistiken</string>
    <string name="exit_label">Beenden</string>
    

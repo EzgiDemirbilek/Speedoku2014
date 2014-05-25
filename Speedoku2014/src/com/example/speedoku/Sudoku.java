@@ -53,11 +53,11 @@ public class Sudoku extends Activity implements OnClickListener {
      
       case R.id.new_button:
     	 Intent spielI = new Intent(this, Spielplan.class);
-    	  Random zufall = new Random();
-     	   next = zufall.nextInt(2)+1;
-       startActivity(spielI); 
-
+//     	 startSpiel();
+     	 //neuesSpiel();
+     	 startActivity(spielI); 
          break;
+         
       case R.id.statistik_button:
      	 Intent statistik = new Intent(this, Statistiken.class);
          startActivity(statistik); 
@@ -87,24 +87,27 @@ public class Sudoku extends Activity implements OnClickListener {
    }
 
    //Schwierigkeitsgrad auswählen
-   private void neuesSpielDialog() {
+   private void neuesSpiel() {
       new AlertDialog.Builder(this)
            .setTitle(R.string.new_game_title)
            .setItems(R.array.difficulty,
             new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialoginterface,
                      int i) {
-                  startSpiel(i);
+                  startSpiel();
                }
             })
            .show();
    }
 
    //neues Spiel starten, nachdem man eine Schwierigkeit
-   private void startSpiel(int i) {
-      Log.d(TAG, "clicked on " + i);
-      Intent intent = new Intent(Sudoku.this, Game.class);
-      intent.putExtra(Game.KEY_DIFFICULTY, i);
-      startActivity(intent);
+   private void startSpiel() {
+  	  Random zufall = new Random();
+ 	  next = zufall.nextInt(2)+1;
+      Log.d(TAG, "Zufallskarte " + next);
+//      Intent intent = new Intent(Sudoku.this, Game.class);
+//      intent.putExtra(Game.KEY_DIFFICULTY, i);
+//      startActivity(intent);
+      
    }
 }
