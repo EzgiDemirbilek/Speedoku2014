@@ -14,7 +14,7 @@ public class DBVerbindung {
 
 	
 //	cloud sql
-//	private static String url = "jdbc:mysql://localhost:3306/social-media?user=root&password=";
+//	private static String url = "jdbc:mysql://localhost:3306/social-media?user=root&password="; df
 
 	
 
